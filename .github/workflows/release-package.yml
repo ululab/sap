@@ -1,4 +1,4 @@
-name: Ululab-SAP
+name: Node.js Package
 
 on:
   release:
