@@ -1,0 +1,19 @@
+{
+  "name": "sap",
+  "version": "1.0.0",
+  "description": "Collegamenti e chiamate a SAP",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ululab/sap.git"
+  },
+  "author": "Ululab",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ululab/sap/issues"
+  },
+  "homepage": "https://github.com/ululab/sap#readme"
+}
