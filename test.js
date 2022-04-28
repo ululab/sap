@@ -1,3 +1,9 @@
+// import sap from 'sap'
+import Sap from './index.js'
+
+var sapConnection = await Sap.connect();
+
+console.log( sapConnection );
 
 //var sap1 = await Sap.connect();
 
