@@ -1,5 +1,21 @@
+import Sap from './index.js';
 
-//var sap1 = await Sap.connect();
+var sap1 = await Sap.connect();
+
+await sap1.disconnect();
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // await sap1.disconnect()
 // console.log(sap1);
