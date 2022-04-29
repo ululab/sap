@@ -1,8 +1,14 @@
-import Sap from './index.js';
 
-var sap1 = await Sap.connect();
+const Sap = require('./index');
+// or
+// const Sap = require('./lib/sap');
 
-await sap1.disconnect();
+async function run() {
+   var sap = await Sap.connect();
+   await sap.disconnect();
+}
+
+run();
 
 
 
