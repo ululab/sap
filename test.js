@@ -1,4 +1,3 @@
-
 const Sap = require('./index');
 // or
 // const Sap = require('./lib/sap');
@@ -19,8 +18,31 @@ run();
 
 
 
+async function findAnagrafica(code) {
+  // ID univoco del lead/cliente CardCode
 
+  // Campo che definisce la P.IVA LicTradNum
 
+  // Codice Fiscale AddId
+
+  // Ragione Sociale / Nome  Cognome CardName
+
+  // Tipo Business Partner CardType [C=Cliente, L=Lead, S= Fornitore]
+
+  var sap = await Sap.connect();
+
+  await sap.get('BusinessPartners', {});
+
+  console.log(sap);
+
+  await sap.disconnect();
+
+  console.log(sap);
+
+  return sap;
+}
+
+// console.log( findAnagrafica('code') );
 
 
 // await sap1.disconnect()
