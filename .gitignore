@@ -132,3 +132,4 @@ dist
 # custom
 test.js
 .npmrc
+test/
