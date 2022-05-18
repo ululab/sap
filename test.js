@@ -170,7 +170,7 @@ async function testConn() {
     }
   };
 
-  var sap = await Sap.connect(dataConn);
+  var sap = await Sap.connect();
   sap.debug = false;
   console.log(sap);
 
@@ -184,7 +184,7 @@ async function testConn() {
                                       $filter: `UpdateDate ge '${update.date}',UpdateTime ge '${update.time}'`,
                                     });
   console.log(sap.responseData);
-  await sap.disconnect();
+  //await sap.disconnect();
   console.log(sap);
 }
 
