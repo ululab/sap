@@ -5,10 +5,11 @@ const fs = require('fs');
 
 async function run() {
    var sap = await Sap.connect();
+   console.log(sap);
    await sap.disconnect();
 }
 
-// run();
+ // run();
 
 
 
@@ -100,7 +101,7 @@ async function insertPreventivo() {
 
 let pdf = fs.readFileSync('test/file-preventivo.pdf').toString();
 
-console.log(pdf);
+//console.log(pdf);
 
 async function invioDocumentoPreventivo() {
 
@@ -137,19 +138,54 @@ async function invioDocumentoPreventivo() {
   // console.log(sap.getHeaders())
   await sap.disconnect();
 
-  console.log(sap);
+  console.log(Object.keys(sap.axiosObject));
+  console.log(sap.axiosObject.response);
+  //console.log(sap);
   return sap;
 
 }
 
 async function debug() {
   var sap = await Sap.connect();
-  sap.debug = true;
-  console.log(sap);
+  sap.debug = false;
+  
   await sap.disconnect();
 }
 
 //debug();
 //console.log(pdf);
 
-invioDocumentoPreventivo();
+//invioDocumentoPreventivo();
+
+
+async function testConn() {
+  let dataConn = {
+    "timestampStartSession": 1652867440003,
+    "timestampExpireSession": 1652868160003,
+    "loginData": {
+      "odata.metadata": "https://meditsl.gendata.it:50000/b1s/v1/$metadata#B1Sessions/@Element",
+      "SessionId": "f95147f0-d68f-11ec-8000-005056a0e477",
+      "Version": "1000170",
+      "SessionTimeout": 720
+    }
+  };
+
+  var sap = await Sap.connect(dataConn);
+  sap.debug = false;
+  console.log(sap);
+
+  let update = {
+    date: '2022-05-17',
+    time: '01:00:00'
+  };
+
+  await sap.get('BusinessPartners', {'$select': 'CardCode,FederalTaxID,UpdateDate,UpdateTime', 
+                                      // $filter: `startswith(FederalTaxID, '${'IT0762963015'}')`,
+                                      $filter: `UpdateDate ge '${update.date}',UpdateTime ge '${update.time}'`,
+                                    });
+  console.log(sap.responseData);
+  await sap.disconnect();
+  console.log(sap);
+}
+
+testConn();
