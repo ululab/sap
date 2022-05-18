@@ -1,6 +1,6 @@
 {
   "name": "@ululab/sap",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Collegamenti e chiamate a SAP",
   "main": "index.js",
   "scripts": {
