@@ -188,4 +188,27 @@ async function testConn() {
   console.log(sap);
 }
 
-testConn();
+//testConn();
+
+async function anagrafiche() {
+
+  var sap = await Sap.connect();
+
+  sap.debug = true;
+
+
+  await sap.get('BusinessPartners', {'$select': 'CardCode,CardType,FederalTaxID,UpdateDate,UpdateTime', 
+                                      // $filter: `startswith(FederalTaxID, '${'IT0762963015'}')`,
+                                      //$filter: `UpdateDate ge '${update.date}',UpdateTime ge '${update.time}'`,
+                                    });
+  // console.log(sap.responseData);
+  //console.log(sap.getHeaders());
+  await sap.disconnect();
+  // console.log(sap.responseData);
+  console.log(sap.getHeaders());
+  //let customers = sap.responseData.value.filter(e => e.CardType != 'cSupplier');
+  //customers = customers.map(e => e.CardCode);
+  //console.log(customers);
+}
+
+anagrafiche();
