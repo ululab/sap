@@ -3,18 +3,24 @@ const fs = require('fs');
 // or
 // const Sap = require('./lib/sap');
 
+const CREDENTIALS = {
+    CompanyDB: 'TESTMEDIT',
+    UserName: 'utEsterno',
+    Password: 'cr0M@test3'
+}
+
+const BASE = 'https://meditsl.gendata.it:50000/b1s/v1/'
+
 async function run() {
-   var sap = await Sap.connect();
+   var sap = await Sap.connect({
+     credentials: CREDENTIALS,
+     base: BASE,
+   });
    console.log(sap);
    await sap.disconnect();
 }
 
- // run();
-
-
-
-
-
+run();
 
 
 async function findAnagrafica(code) {
@@ -148,7 +154,7 @@ async function invioDocumentoPreventivo() {
 async function debug() {
   var sap = await Sap.connect();
   sap.debug = false;
-  
+
   await sap.disconnect();
 }
 
@@ -167,7 +173,9 @@ async function testConn() {
       "SessionId": "f95147f0-d68f-11ec-8000-005056a0e477",
       "Version": "1000170",
       "SessionTimeout": 720
-    }
+    },
+    credentials: CREDENTIALS,
+    base: BASE,
   };
 
   var sap = await Sap.connect();
@@ -179,7 +187,7 @@ async function testConn() {
     time: '01:00:00'
   };
 
-  await sap.get('BusinessPartners', {'$select': 'CardCode,FederalTaxID,UpdateDate,UpdateTime', 
+  await sap.get('BusinessPartners', {'$select': 'CardCode,FederalTaxID,UpdateDate,UpdateTime',
                                       // $filter: `startswith(FederalTaxID, '${'IT0762963015'}')`,
                                       $filter: `UpdateDate ge '${update.date}',UpdateTime ge '${update.time}'`,
                                     });
@@ -197,7 +205,7 @@ async function anagrafiche() {
   sap.debug = true;
 
 
-  await sap.get('BusinessPartners', {'$select': 'CardCode,CardType,FederalTaxID,UpdateDate,UpdateTime', 
+  await sap.get('BusinessPartners', {'$select': 'CardCode,CardType,FederalTaxID,UpdateDate,UpdateTime',
                                       // $filter: `startswith(FederalTaxID, '${'IT0762963015'}')`,
                                       //$filter: `UpdateDate ge '${update.date}',UpdateTime ge '${update.time}'`,
                                     });
@@ -211,4 +219,4 @@ async function anagrafiche() {
   //console.log(customers);
 }
 
-anagrafiche();
+// anagrafiche();
