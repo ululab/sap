@@ -13,15 +13,37 @@ const BASE = 'https://meditsl.gendata.it:50000/b1s/v1/'
 
 async function run() {
    var sap = await Sap.connect({
-     credentials: CREDENTIALS,
-     base: BASE,
+    "timestampStartSession": 1652867440003,
+    "timestampExpireSession": new Date().getTime()+10000,
+    "loginData": {
+      "odata.metadata": "https://meditsl.gendata.it:50000/b1s/v1/$metadata#B1Sessions/@Element",
+      "SessionId": "f95147f0-d68f-11ec-8000-005056a0e477",
+      "Version": "1000170",
+      "SessionTimeout": 720
+    },
+    credentials: CREDENTIALS,
+    base: BASE,
    });
+   await sap.get('BusinessPartners', {'$select': 'CardCode,FederalTaxID', $filter: `startswith(FederalTaxID, '${'code'}')`});
    console.log(sap);
    await sap.disconnect();
 }
 
-run();
+// run();
 
+async function authBasicExample() {
+
+   var sap = await Sap.connect({
+    authenticationType: 'basic',
+    credentials: CREDENTIALS,
+    base: 'https://medit-pon1.gendata.it:50443/AttachInsert_TEST/',
+  });
+
+   console.log(sap.getHeaders());
+
+}
+
+authBasicExample();
 
 async function findAnagrafica(code) {
   // ID univoco del lead/cliente CardCode
