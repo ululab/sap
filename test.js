@@ -29,7 +29,7 @@ async function run() {
    // sap.disconnect();
 }
 
- run();
+ //run();
 
 async function authBasicExample() {
 
@@ -56,7 +56,10 @@ async function findAnagrafica(code) {
 
   // Tipo Business Partner CardType [C=Cliente, L=Lead, S= Fornitore]
 
-  var sap = await Sap.connect();
+  var sap = await Sap.connect({
+    credentials: CREDENTIALS,
+    base: BASE,
+  });
 
   await sap.get('BusinessPartners', {'$select': 'CardCode,FederalTaxID', $filter: `startswith(FederalTaxID, '${code}')`});
 
@@ -72,7 +75,7 @@ async function findAnagrafica(code) {
   return sap;
 }
 
-// findAnagrafica('IT0762963015');
+findAnagrafica('IT0762963015');
 
 // await sap1.disconnect()
 // console.log(sap1);
