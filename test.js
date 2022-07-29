@@ -24,12 +24,12 @@ async function run() {
     credentials: CREDENTIALS,
     base: BASE,
    });
-   await sap.get('BusinessPartners', {'$select': 'CardCode,FederalTaxID', $filter: `startswith(FederalTaxID, '${'code'}')`});
+   sap.get('BusinessPartners', {'$select': 'CardCode,FederalTaxID', $filter: `startswith(FederalTaxID, '${'code'}')`});
    console.log(sap);
-   await sap.disconnect();
+   // sap.disconnect();
 }
 
-// run();
+ run();
 
 async function authBasicExample() {
 
@@ -43,7 +43,7 @@ async function authBasicExample() {
 
 }
 
-authBasicExample();
+// authBasicExample();
 
 async function findAnagrafica(code) {
   // ID univoco del lead/cliente CardCode
@@ -242,3 +242,16 @@ async function anagrafiche() {
 }
 
 // anagrafiche();
+
+async function testReponse() {
+
+  var sap = await Sap.connect();
+
+  sap.debug = true;
+
+  console.log(sap);
+
+
+}
+
+//testReponse()
